@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro; // Si usas TextMeshPro
+using TMPro;
 
 public class MenuManagerXR : MonoBehaviour
 {
@@ -20,13 +20,15 @@ public class MenuManagerXR : MonoBehaviour
 
     void Start()
     {
+        // Cargar idioma guardado
         int savedLang = PlayerPrefs.GetInt("language", 0);
         languageDropdown.value = savedLang;
         ChangeLanguage(savedLang);
 
-        int savedScore = PlayerPrefs.GetInt("puntObj", 5);
-        if (savedScore == 10) scoreDropdown.value = 1;
-        else if (savedScore == 15) scoreDropdown.value = 2;
+        // Cargar puntuación guardada
+        int savedScore = PlayerPrefs.GetInt("puntObj", 10);
+        if (savedScore == 20) scoreDropdown.value = 1;
+        else if (savedScore == 30) scoreDropdown.value = 2;
         else scoreDropdown.value = 0;
     }
 
@@ -39,9 +41,10 @@ public class MenuManagerXR : MonoBehaviour
 
         // Guardar puntuación objetivo
         int dropdownValue = scoreDropdown.value;
-        if (dropdownValue == 1) targetScore = 10;
-        else if (dropdownValue == 2) targetScore = 15;
-        else targetScore = 5;
+        if (dropdownValue == 1) targetScore = 20;
+        else if (dropdownValue == 2) targetScore = 30;
+        else targetScore = 10;
+
         PlayerPrefs.SetInt("puntObj", targetScore);
     }
 
@@ -76,11 +79,11 @@ public class MenuManagerXR : MonoBehaviour
 
     public void PlayEasyMode()
     {
-        SceneManager.LoadScene("EscenaFacil");
+        SceneManager.LoadScene("NivelFacil");
     }
 
     public void PlayHardMode()
     {
-        SceneManager.LoadScene("EscenaDificil");
+        SceneManager.LoadScene("NivelDificil");
     }
 }
